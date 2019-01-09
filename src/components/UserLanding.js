@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 
-export default class Home extends Component {
+export default class UserLanding extends Component {
   state = {
   urlInput: '',
 }
@@ -22,20 +22,26 @@ handleSubmit = (event) => {
   const url = this.state.urlInput
   this.changeState('')
   // changes state back to be empty
-  
+
   console.log(url);
 }
 
   render() {
     return (
-      <div className='home-main-container'>
-        <h1> Home Page </h1>
-        <div className='home-input'>
-          <h2>enter a url</h2>
+      <div className='user-landing-main-container'>
+        <h1> Welcome! </h1>
+        <h2>Please enter a url or Choose a room to enter</h2>
+        <div className='user-landing-input'>
           <form onSubmit={this.handleSubmit}>
             <input name='url' className='url-input' placeholder='URL' value={this.state.urlInput} onChange={this.handleChange}/>
             <input type='submit'/>
           </form>
+        </div>
+        <div className='choose-room'>
+          <div className='room-card'>
+            <h3>room 1</h3>
+            <p>playing: NYR VS NYI</p>
+          </div>
         </div>
       </div>
     )

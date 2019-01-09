@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Home from './components/Home';
+import Landing from './components/Landing';
+import UserLanding from './components/UserLanding';
 import VideoPlayer from './components/VideoPlayer';
 import './App.css';
 
@@ -9,8 +10,8 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Route path="/home" component={Home} />
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Landing} />
+          <Route path="/UserPage" component={UserLanding} />
           <Route path="/video-player" component={VideoPlayer} />
         </div>
     </Router>
