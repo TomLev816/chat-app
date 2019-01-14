@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
 
 
-export default class Landing extends Component {
+class Landing extends Component {
 
   render() {
     return (
@@ -21,3 +22,11 @@ export default class Landing extends Component {
     );
   }
 }
+
+// const mapStateToProps = (state) => {
+//   return {
+//     loadedUsers: state.users
+//   }
+// }
+
+export default connect()(Landing)
