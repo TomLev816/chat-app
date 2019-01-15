@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { getUsers } from './store/actions/'
 import Landing from './components/Landing';
 import UserLanding from './components/UserLanding';
 import VideoPlayer from './components/VideoPlayer';
@@ -11,7 +12,7 @@ class App extends Component {
   componentDidMount() {
     fetch('http://localhost:4000/api/v1/users')
       .then(res => res.json())
-      .then(resJson => console.log(resJson))
+      .then(resJson => this.props.loadUsersFromApi(resJson))
   }
 
   render() {
@@ -34,7 +35,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-
+  loadUsersFromApi: apiUserData => dispatch(getUsers(apiUserData))
 });
 
 
