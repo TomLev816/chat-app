@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 class Landing extends Component {
 
   render() {
+    console.log(this.props.loadedUsers);
     return (
       <div className='landing-container'>
         <div className='landing-welcome'>
@@ -23,10 +24,10 @@ class Landing extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     loadedUsers: state.users
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    loadedUsers: state.users
+  }
+}
 
-export default connect()(Landing)
+export default connect(mapStateToProps)(Landing)
