@@ -5,12 +5,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from "react-redux";
 import { store } from "./store/";
+import { ActionCableProvider } from 'react-actioncable-provider';
+import { API_WS_ROOT } from './constants';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-
+  <ActionCableProvider url={API_WS_ROOT}>
+    <Provider store={store}>
+      <App />
+    </Provider>,
+   </ActionCableProvider>,
 document.getElementById('root')
 );
 
