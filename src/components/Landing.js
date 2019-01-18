@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+// import { Redirect} from 'react-router-dom'
 
-// ToDo make the signup and Login forms not need to be repetitive 
+// ToDo make the signup and Login forms not need to be repetitive
 
 class Landing extends Component {
 
@@ -19,7 +20,11 @@ class Landing extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    alert(this.state.username)
+    if (this.state.username) {
+      return this.props.history.push('/user-page')
+    } else {
+      alert('Enter a username and password')
+    }
   }
 
   changeShowing = (logSign) => {
@@ -31,7 +36,6 @@ class Landing extends Component {
 
   render() {
     const {username, password, showing} = this.state
-    console.log(this.props.loadedUsers);
     return (
       <div className='landing-container'>
         <div className='landing-welcome'>
@@ -100,7 +104,8 @@ class Landing extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    loadedUsers: state.users
+    loadedUsers: state.users,
+    loadedUser: state.userLoggedIn
   }
 }
 

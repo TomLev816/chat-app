@@ -5,3 +5,11 @@ export const getUsers = (apiData) => {
     payload: apiData
   }
 }
+
+export const userLoggedInAction = (user) => {
+  console.log(user)
+  return {
+    type: "LOGIN_USER",
+    payload: user
+  }
+}

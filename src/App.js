@@ -20,7 +20,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <Route exact path="/" component={Landing} />
-          <Route path="/UserPage" component={UserLanding} />
+          <Route path="/user-page" component={UserLanding} />
           <Route path="/video-player" component={VideoPlayer} />
         </div>
     </Router>
