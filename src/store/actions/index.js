@@ -1,8 +1,16 @@
-export const getUsers = (apiData) => {
-  console.log(apiData)
+export const getUsers = (userApiData) => {
+  console.log(userApiData)
   return {
     type: "LOAD_USERS_FROM_API",
-    payload: apiData
+    payload: userApiData
+  }
+}
+
+export const getRooms = (roomApiData) => {
+  console.log(roomApiData)
+  return {
+    type: "LOAD_ROOMS_FROM_API",
+    payload: roomApiData
   }
 }
 

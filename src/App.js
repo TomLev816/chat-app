@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import { getUsers } from './store/actions/'
+import { getUsers, getRooms } from './store/actions/'
+
 import Landing from './components/Landing';
 import UserLanding from './components/UserLanding';
 import VideoPlayer from './components/VideoPlayer';
@@ -13,6 +14,10 @@ class App extends Component {
     fetch('http://localhost:4000/api/v1/users')
       .then(res => res.json())
       .then(resJson => this.props.loadUsersFromApi(resJson))
+
+    fetch('http://localhost:4000/api/v1/rooms')
+      .then(res => res.json())
+      .then(resJson => this.props.loadRoomsFromApi(resJson))
   }
 
   render() {
@@ -30,12 +35,14 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.users
+    users: state.users,
+    rooms: state.rooms,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  loadUsersFromApi: apiUserData => dispatch(getUsers(apiUserData))
+  loadUsersFromApi: apiUserData => dispatch(getUsers(apiUserData)),
+  loadRoomsFromApi: apiRoomData => dispatch(getRooms(apiRoomData)),
 });
 
 

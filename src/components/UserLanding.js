@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 
 
-
-export default class UserLanding extends Component {
+class UserLanding extends Component {
   state = {
   urlInput: '',
+  enterRoom: false
 }
 
 changeState = (newState) => {
@@ -26,7 +27,12 @@ handleSubmit = (event) => {
   console.log(url);
 }
 
+enterRoom = () => {
+  return this.props.history.push('/video-player')
+}
+
   render() {
+    console.log(this.props.allRooms)
     return (
       <div className='user-landing-main-container'>
         <h1> Welcome! </h1>
@@ -38,7 +44,7 @@ handleSubmit = (event) => {
           </form>
         </div>
         <div className='choose-room'>
-          <div className='room-card'>
+          <div className='room-card' onClick={this.enterRoom}>
             <h3>room 1</h3>
             <p>playing: NYR VS NYI</p>
           </div>
@@ -48,3 +54,17 @@ handleSubmit = (event) => {
   }
 
 }
+
+const mapStateToProps = (state) => {
+  return {
+    allRooms: state.rooms,
+  }
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//
+//   }
+// }
+
+export default connect(mapStateToProps)(UserLanding)

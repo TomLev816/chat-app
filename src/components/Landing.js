@@ -28,10 +28,12 @@ class Landing extends Component {
   }
 
   changeShowing = (logSign) => {
-    console.log(logSign);
-    this.setState({
-      showing: logSign,
-    }, console.log(this.state.showing))
+    if (this.state.showing === logSign) {
+    } else {
+      this.setState({
+        showing: logSign,
+      })
+    }
   }
 
   render() {
