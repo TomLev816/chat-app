@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
-import Chat from './Chat'
+import { connect } from "react-redux";
+// import Chat from './Chat'
 
-export default class VideoPlayer extends Component {
+class VideoPlayer extends Component {
+  room = this.props.allRooms.find(room => room.id === this.props.userLoggedIn.room_id)
   render () {
     return (
       <div>
-        <ReactPlayer url='https://helios.gorillavid.in:8182/p/gAAAAABcNg3TfU9Jx6KAZALMW0n_ijvCT4H1NsOnkteSS_A23elMwFLlkj6pXGVOALZwfOn0vPiDbjvDlFv545bRpi3a8e40k-K_sHz7XfoVMUccMFhE8we56GQgaJ1wW9eE4UzvRUDr/video.mp4' playing />
-        <Chat />
+        <ReactPlayer url={this.room.url} playing />
       </div>
     )
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    allRooms: state.rooms,
+    userLoggedIn: state.userLoggedIn
+  }
+}
+
+export default connect(mapStateToProps)(VideoPlayer)
+
+// line 10 = <Chat />

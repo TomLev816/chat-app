@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import { userLoggedInAction } from '../store/actions/'
 // import { Redirect} from 'react-router-dom'
 
 // ToDo make the signup and Login forms not need to be repetitive
@@ -20,12 +21,19 @@ class Landing extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    if (this.state.username) {
+    let user = this.props.loadedUsers.filter(user => user.username === this.state.username)[0]
+    if (user) {
+      this.props.userLoggedInFunction(user);
       return this.props.history.push('/user-page')
     } else {
       alert('Enter a username and password')
     }
   }
+  //
+  //
+  //   event.preventDefault()
+  //   if (this.state.username) {
+  // }
 
   changeShowing = (logSign) => {
     if (this.state.showing === logSign) {
@@ -111,4 +119,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Landing)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    userLoggedInFunction: user => dispatch(userLoggedInAction(user)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Landing)

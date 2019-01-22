@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import RoomCard from './RoomCard'
 
 
 class UserLanding extends Component {
@@ -27,7 +28,8 @@ handleSubmit = (event) => {
   console.log(url);
 }
 
-enterRoom = () => {
+enterRoom = (roomId) => {
+  console.log(roomId);
   return this.props.history.push('/video-player')
 }
 
@@ -44,10 +46,7 @@ enterRoom = () => {
           </form>
         </div>
         <div className='choose-room'>
-          <div className='room-card' onClick={this.enterRoom}>
-            <h3>room 1</h3>
-            <p>playing: NYR VS NYI</p>
-          </div>
+          <RoomCard enterRoom={this.enterRoom} rooms={this.props.allRooms}/>
         </div>
       </div>
     )
