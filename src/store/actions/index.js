@@ -21,3 +21,11 @@ export const userLoggedInAction = (user) => {
     payload: user
   }
 }
+
+export const changeUserRoom = (userRoom) => {
+  console.log(userRoom)
+  return {
+    type: "CHANGE_USER_ROOM",
+    payload: userRoom
+  }
+}
