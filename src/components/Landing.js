@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import { userLoggedInAction } from '../store/actions/'
+import { userLoggedInAction, addNewUser } from '../store/actions/'
 // import { Redirect} from 'react-router-dom'
 
-// ToDo make the signup and Login forms not need to be repetitive
+// ToDo make the signup and Login forms DRY
 
 class Landing extends Component {
 
@@ -29,11 +29,31 @@ class Landing extends Component {
       alert('Enter a username and password')
     }
   }
-  //
-  //
-  //   event.preventDefault()
-  //   if (this.state.username) {
-  // }
+
+  handleSignup = (event) => {
+    event.preventDefault()
+    let newUser = {
+      username: this.state.username,
+      password: this.state.password,
+      room_id: 1,
+    }
+    console.log(newUser);
+
+    fetch('http://localhost:4000/api/v1/users', {
+      method: 'POST',
+      body: JSON.stringify(newUser),
+      headers:{
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(user => {
+        this.props.userLoggedInFunction(user)
+        this.props.addNewUserFunction(user)
+      })
+      return this.props.history.push('/user-page')
+  }
 
   changeShowing = (logSign) => {
     if (this.state.showing === logSign) {
@@ -101,7 +121,7 @@ class Landing extends Component {
                 </div>
                 <div>
                   <center>
-                    <button onClick={this.handleSubmit} >Sign Up</button>
+                    <button onClick={this.handleSignup} >Sign Up</button>
                   </center>
                 </div>
               </div> : null}
@@ -122,6 +142,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     userLoggedInFunction: user => dispatch(userLoggedInAction(user)),
+    addNewUserFunction: newUser => dispatch(addNewUser(newUser))
   }
 }
 

@@ -14,6 +14,22 @@ export const getRooms = (roomApiData) => {
   }
 }
 
+export const newRoom = (roomApiData) => {
+  console.log(roomApiData)
+  return {
+    type: "CREATE_NEW_ROOM",
+    payload: roomApiData
+  }
+}
+
+export const addNewUser = (user) => {
+  console.log(user);
+  return {
+    type: "NEW_USER",
+    payload: user
+  }
+}
+
 export const userLoggedInAction = (user) => {
   console.log(user)
   return {
