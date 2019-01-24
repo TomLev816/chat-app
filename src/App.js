@@ -45,7 +45,6 @@ const mapDispatchToProps = dispatch => ({
   loadRoomsFromApi: apiRoomData => dispatch(getRooms(apiRoomData)),
 });
 
-
 const exposeAll = connect(
   mapStateToProps,
   mapDispatchToProps

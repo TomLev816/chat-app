@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import RoomCard from './RoomCard'
-import { changeUserRoom, newRoom } from '../store/actions/'
+import { changeUserRoom, newRoom, setActiveRoom } from '../store/actions/'
 
 
 class UserLanding extends Component {
@@ -46,7 +46,9 @@ handleSubmit = (event) => {
 }
 
 enterRoom = (roomId) => {
+  const room = this.props.allRooms.find(room => room.id === roomId)
   this.props.changeUserRoom(roomId)
+  this.props.setActiveRoom(room)
   return this.props.history.push('/video-player')
 }
 
@@ -85,7 +87,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     changeUserRoom: changeRoom => dispatch(changeUserRoom(changeRoom)),
-    createNewRoom: newRoomObj => dispatch(newRoom(newRoomObj))
+    createNewRoom: newRoomObj => dispatch(newRoom(newRoomObj)),
+    setActiveRoom: activeRoom => dispatch(setActiveRoom(activeRoom))
   }
 }
 

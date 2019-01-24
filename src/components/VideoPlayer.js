@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
 import { connect } from "react-redux";
-// import Chat from './Chat'
+import Chat from './Chat'
 
 class VideoPlayer extends Component {
 
@@ -12,6 +12,7 @@ class VideoPlayer extends Component {
     return (
       <div>
         <ReactPlayer url={this.room.url} playing />
+        <Chat />
       </div>
     )
   }
@@ -26,5 +27,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(VideoPlayer)
-
-// line 10 = <Chat />

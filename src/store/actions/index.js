@@ -22,6 +22,22 @@ export const newRoom = (roomApiData) => {
   }
 }
 
+export const roomNewMessage = (newMessage) => {
+  console.log(newMessage)
+  return {
+    type: "ADD_NEW_MESSAGE",
+    payload: newMessage
+  }
+}
+
+export const setActiveRoom = (activeRoom) => {
+  console.log(activeRoom)
+  return {
+    type: "SET_ACTIVE_ROOM",
+    payload: activeRoom
+  }
+}
+
 export const addNewUser = (user) => {
   console.log(user);
   return {
