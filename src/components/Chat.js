@@ -4,50 +4,30 @@ import React from 'react';
 import { connect } from "react-redux";
 import { ActionCable } from 'react-actioncable-provider';
 import { API_ROOT } from '../constants';
+import { roomNewMessage } from '../store/actions/'
 // import NewRoomForm from './NewRoomForm';
 import MessagesArea from './MessagesArea';
 import Cable from './Cable';
 
 class Chat extends React.Component {
 
-  // // all rooms
-  // componentDidMount = () => {
-  //   fetch(`${API_ROOT}/rooms`)
-  //     .then(res => res.json())
-  //     .then(rooms => this.setState({ rooms }));
-  // };
-
-
-  handleReceivedRoom = response => {
-    const { room } = response;
-    this.setState({
-      rooms: [...this.props.allRooms, room]
-    });
-  };
-
   handleReceivedMessage = response => {
     const { message } = response;
+    console.log(message);
     const rooms = [...this.props.allRooms];
-    const room = rooms.find(
-      room => room.id === message.room_id
-    );
+    const room = rooms.find(room => room.id === message.room_id);
     room.messages = [...room.messages, message];
-    this.setState({ rooms });
+    this.props.newMessage(rooms)
   };
 
   render = () => {
-    const {activeRoom } = this.props;
-    const rooms = this.props.allRooms
-    console.log(rooms);
+    const {activeRoom, allRooms } = this.props;
+    console.log(allRooms);
     return (
-      <div className="roomsList">
+      <div className="allRoomsList">
         <ActionCable channel={{ channel: 'RoomsChannel' }} onReceived={this.handleReceivedRoom} />
-        {rooms.length ? (
-          <Cable rooms={rooms} handleReceivedMessage={this.handleReceivedMessage} />
-        ) : null}
-        {activeRoom ? (
-          <MessagesArea room={activeRoom} />
-        ) : null}
+        {allRooms.length ? <Cable rooms={allRooms} handleReceivedMessage={this.handleReceivedMessage} /> : null}
+        {activeRoom ? <MessagesArea room={findActiveRoom(this.props.userLoggedIn, allRooms)} /> : null}
       </div>
     );
   };
@@ -62,4 +42,14 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Chat)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    newMessage: message => dispatch(roomNewMessage(message))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chat)
+
+const findActiveRoom = ( user, allRooms) => {
+  return allRooms.find(room => room.id === user.room_id)
+}

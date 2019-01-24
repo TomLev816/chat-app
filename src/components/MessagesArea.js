@@ -4,9 +4,11 @@ import React from 'react';
 import { connect } from "react-redux";
 import NewMessageForm from './NewMessageForm';
 
+
 const MessagesArea = ({
   room: { id, name, messages },
 }) => {
+  console.log(messages);
   return (
     <div className="messagesArea">
       <h2>{name}</h2>

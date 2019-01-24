@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import { ActionCable } from 'react-actioncable-provider';
 
 const Cable = ({ rooms, handleReceivedMessage }) => {
+  console.log(rooms);
   return (
     <Fragment>
       {rooms.map(room => {
