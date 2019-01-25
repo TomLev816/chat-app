@@ -8,7 +8,6 @@ import NewMessageForm from './NewMessageForm';
 const MessagesArea = ({
   room: { id, name, messages },
 }) => {
-  console.log(messages);
   return (
     <div className="messagesArea">
       <h2>{name}</h2>
@@ -30,7 +29,6 @@ export default connect(mapStateToProps)(MessagesArea)
 // helpers
 
 const orderedMessages = messages => {
-  console.log(messages);
   const sortedMessages = messages.sort(
     (a, b) => new Date(a.created_at) - new Date(b.created_at)
   );

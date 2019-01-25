@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import { userLoggedInAction, addNewUser } from '../store/actions/'
-// import { Redirect} from 'react-router-dom'
+
 
 // ToDo make the signup and Login forms DRY
 
 class Landing extends Component {
-
   state = {
     username: '',
     password: '',
@@ -22,6 +21,7 @@ class Landing extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     let user = this.props.loadedUsers.filter(user => user.username === this.state.username)[0]
+    // if user exist make that user logged in and send user to user landing page
     if (user) {
       this.props.userLoggedInFunction(user);
       return this.props.history.push('/user-page')
@@ -37,7 +37,6 @@ class Landing extends Component {
       password: this.state.password,
       room_id: 1,
     }
-    console.log(newUser);
 
     fetch('http://localhost:4000/api/v1/users', {
       method: 'POST',
@@ -49,13 +48,18 @@ class Landing extends Component {
     })
       .then(res => res.json())
       .then(user => {
+        // sets new user as logged in
         this.props.userLoggedInFunction(user)
+
+        // adds new user to front end state
         this.props.addNewUserFunction(user)
       })
+      // sends user to user landing page
       return this.props.history.push('/user-page')
   }
 
   changeShowing = (logSign) => {
+    // checks to see if user changed betweeen login and sign up
     if (this.state.showing === logSign) {
     } else {
       this.setState({

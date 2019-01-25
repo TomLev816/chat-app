@@ -3,7 +3,6 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { ActionCable } from 'react-actioncable-provider';
-import { API_ROOT } from '../constants';
 import { roomNewMessage } from '../store/actions/'
 // import NewRoomForm from './NewRoomForm';
 import MessagesArea from './MessagesArea';
@@ -13,7 +12,6 @@ class Chat extends React.Component {
 
   handleReceivedMessage = response => {
     const { message } = response;
-    console.log(message);
     const rooms = [...this.props.allRooms];
     const room = rooms.find(room => room.id === message.room_id);
     room.messages = [...room.messages, message];
