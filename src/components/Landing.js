@@ -38,6 +38,7 @@ class Landing extends Component {
       room_id: 1,
     }
 
+    console.log(newUser);
     fetch('http://localhost:4000/api/v1/users', {
       method: 'POST',
       body: JSON.stringify(newUser),
@@ -48,6 +49,7 @@ class Landing extends Component {
     })
       .then(res => res.json())
       .then(user => {
+        console.log(user);
         // sets new user as logged in
         this.props.userLoggedInFunction(user)
 

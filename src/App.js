@@ -13,7 +13,10 @@ class App extends Component {
   componentDidMount() {
     fetch('http://localhost:4000/api/v1/users')
       .then(res => res.json())
-      .then(resJson => this.props.loadUsersFromApi(resJson))
+      .then(resJson => {
+        console.log(resJson);
+        this.props.loadUsersFromApi(resJson)
+      })
 
     fetch('http://localhost:4000/api/v1/rooms')
       .then(res => res.json())
