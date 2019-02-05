@@ -32,7 +32,8 @@ const orderedMessages = messages => {
   const sortedMessages = messages.sort(
     (a, b) => new Date(a.created_at) - new Date(b.created_at)
   );
-  return sortedMessages.map(message => {
+  const slicedSortedMessages = sortedMessages.slice(-10)
+  return slicedSortedMessages.map(message => {
     return <p key={message.id}> user_{message.user_id} - {message.text}</p>;
   });
 };

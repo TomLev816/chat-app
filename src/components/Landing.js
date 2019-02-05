@@ -21,6 +21,7 @@ class Landing extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     let user = this.props.loadedUsers.filter(user => user.username === this.state.username)[0]
+
     // if user exist make that user logged in and send user to user landing page
     if (user) {
       this.props.userLoggedInFunction(user);
