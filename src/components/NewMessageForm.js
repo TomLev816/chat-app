@@ -32,8 +32,6 @@ class NewMessageForm extends React.Component {
       headers: HEADERS,
       body: JSON.stringify(message)
     })
-    // .then(res => res.json())
-    // .then(messageRes => this.props.newMessage(messageRes))
     this.setState({ text: '' });
   };
 
