@@ -4,7 +4,7 @@ import { userLoggedInAction, addNewUser } from '../store/actions/'
 
 
 // ToDo make the signup and Login forms DRY
-
+// making a commit to check 
 class Landing extends Component {
   state = {
     username: '',
